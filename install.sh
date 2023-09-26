@@ -73,6 +73,16 @@ nmap() {
     sudo apt-get install -y nmap
 }
 
+setoolkit() {
+    # Install Python 3
+    sudo apt-get install -y python3-pip
+    # Install setoolkit
+    git clone https://github.com/trustedsec/social-engineer-toolkit/ setoolkit/
+    cd setoolkit
+    pip3 install -r requirements.txt
+    python3 setup.py
+}
+
 echo "
 1. Metasploit
 2. sqlmap
@@ -90,7 +100,8 @@ echo "
 14. fail2ban
 15. lynis
 16. nmap
-17. exit"
+17. setoolkit
+18. exit"
 
 read -p "O que você quer instalar meu contemporâneo: " tool
 
@@ -144,6 +155,9 @@ case $tool in
     nmap
     ;;
 17)
+    setoolkit
+    ;;
+18)
     echo "Exiting"
     ;;
 *)
