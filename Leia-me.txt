@@ -1,2 +1,4 @@
-	v.20230925.01.01
-	* feature/exilio.0
+* v.20230926.15.57
+    * feature/exilio-01 -add setoolkit e instale o pip3
+* v.20230925.01.01
+    * feature/exilio-0 
