@@ -1,16 +1,17 @@
 #!/bin/bash
 
 frase="coded by exilado"
+morse="-... . -- / ...- .. -. -.. --- / .- --- / . -..- .-.. .. ---"
+logo=("  \e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m> \e[0m"
+" |||  ||  \e[32mE \e[0m\e[35mX \e[0m\e[95mI \e[0m\e[32mL \e[0m\e[35mI \e[0m\e[95mO \e[0m \e[0m ||  |||"
+"\e[0m \e[32m|||__|||\e[0m\e[95m \e[32m* \e[0m\e[35m* \e[0m\e[95m* \e[0m\e[32m* \e[0m\e[35m* \e[0m\e[95m* \e[0m \e[32m|||__|||\e[0m\e[95m")
 
-logo=(
-"  \e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m_ \e[0m\e[32m_ \e[0m\e[35m_ \e[0m\e[95m> \e[0m"
-"||  |||  ||| \e[32mE \e[0m\e[35mX \e[0m\e[95mI \e[0m\e[32mL \e[0m\e[35mI \e[0m\e[95mO \e[0m \e[32m|||  |||"
-"||__|||__||| \e[32m* \e[0m\e[35m* \e[0m\e[95m* \e[0m\e[32m* \e[0m\e[35m* \e[0m\e[95m* \e[0m \e[32m|||__|||"
-)
+IFS=" " 
+morse_array=($morse) 
 
 for ((i = 0; i < ${#frase}; i++)); do
     echo -n -e "\e[35m${frase:$i:1}\e[0m"
-    sleep 0.4
+    sleep 0.6
 done
 
 echo -e "\n"
@@ -20,9 +21,15 @@ for ((frame = 0; frame < ${#logo[@]}; frame++)); do
     sleep 0.7
 done
 
-echo "__________......................................................................................."
+for morse_char in "${morse_array[@]}"; do
+    echo -n -e "\e[35m$morse_char\e[0m"
+    sleep 0.2
+done
+
+echo ""
 
 printf "Pressione Enter para continuar..."
+
 
 Metasploit() {
     sudo apt install snap && sudo snap install metasploit-framework
@@ -83,6 +90,17 @@ setoolkit() {
     python3 setup.py
 }
 
+BITB-framework() {
+    git clone https://github.com/surya-dev-singh/BITB-framwork.git
+    sudo apt install -y python3 python3-pip python3-termcolor
+    sudo apt install -y software-properties-common ca-certificates lsb-release apt-transport-https
+    LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php
+    sudo apt update && sudo apt upgrade
+    sudo apt install -y php8.2
+    cd BITB-framwork
+    python3 bitb.py
+}
+
 echo "
 1. Metasploit
 2. sqlmap
@@ -101,7 +119,8 @@ echo "
 15. lynis
 16. nmap
 17. setoolkit
-18. exit"
+18. BITB-framework
+19. exit"
 
 read -p "O que você quer instalar meu contemporâneo: " tool
 
@@ -154,10 +173,15 @@ case $tool in
 16)
     nmap
     ;;
+
 17)
     setoolkit
     ;;
+    
 18)
+    BITB-framework
+    ;;
+19)
     echo "Exiting"
     ;;
 *)
